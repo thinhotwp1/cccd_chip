@@ -19,9 +19,9 @@ export class AppComponent implements OnDestroy {
 
   getMessage(){
     this.message = this.webSocketService.getMessage();
-    console.log('message: ',this.message)
       // gọi lấy lại message sau mỗi 3s
       console.log('Get message after 3s')
+      console.log('message: ',this.message)
       setTimeout(() => this.getMessage(), 3000);
     
   }
@@ -31,9 +31,9 @@ export class AppComponent implements OnDestroy {
     this.webSocketService.send({ message: 'Hello, WebSocket!' });
   }
 
-  reconnect() {
+  disconnect() {
     // Reconnect to websocket
-    this.webSocketService.connect();
+    this.webSocketService.disconnect();
   }
 
 
