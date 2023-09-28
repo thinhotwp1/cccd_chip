@@ -20,11 +20,10 @@ export class AppComponent implements OnDestroy {
   getMessage(){
     this.message = this.webSocketService.getMessage();
     console.log('message: ',this.message)
-    if (typeof this.message == 'undefined' && !this.message) {
-      // gọi lấy lại message sau mỗi 3s nếu không nhận được tin nhắn
+      // gọi lấy lại message sau mỗi 3s
       console.log('Get message after 3s')
       setTimeout(() => this.getMessage(), 3000);
-    }
+    
   }
 
   sendMessage() {
@@ -41,5 +40,17 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy() {
     // Đảm bảo rằng kết nối WebSocket được đóng khi component bị hủy
     this.webSocketService.disconnect();
+  }
+
+  copyToClipboard() {
+    const el = document.createElement('textarea');
+    el.value = this.message;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+  }
+  clearData(){
+    this.message='null'
   }
 }

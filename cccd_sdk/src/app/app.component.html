@@ -1,11 +1,11 @@
 
-    <p>Kết nối lại nếu không tự kết nối sau 3s, xem chi tiết ở console log</p>
-    <button (click)="reconnect()">Kết nối lại</button>
-
     <div>
-      <h2>Message json-raw in console log :</h2>
+      <h2>Message json-raw, get message 3s/1:</h2>
       <h5 class="message" >{{ message }} </h5>
-
+      
+      <h2>Vui lòng đợi để sao chép json-raw</h2>
+      <button (click)="copyToClipboard()">Coppy json-raw</button>
+      <button (click)="clearData()">Clear data</button>
     </div>
 
 <router-outlet></router-outlet>
