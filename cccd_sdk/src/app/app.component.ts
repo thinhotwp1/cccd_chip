@@ -9,14 +9,22 @@ import { WebSocketService } from './web-socket.service';
 export class AppComponent implements OnDestroy {
 
   title = 'cccd_sdk';
-  messages: string[] = []; // Mảng để lưu trữ các tin nhắn từ WebSocket
-
+ 
+  message: any; // Tin nhắn đã xử lý từ WebSocketService
 
   constructor(private webSocketService: WebSocketService) {
-    this.webSocketService.socket$.subscribe((data: any) => {
-      // Xử lý tin nhắn từ WebSocket và thêm vào mảng messages
-      this.messages.push(data.message);
-    });
+    this.webSocketService.connect(); // Kết nối đến WebSocket
+    this.getMessage();
+  }
+
+  getMessage(){
+    this.message = this.webSocketService.getMessage();
+    console.log('message: ',this.message)
+    if (typeof this.message == 'undefined' && !this.message) {
+      // gọi lấy lại message sau mỗi 3s nếu không nhận được tin nhắn
+      console.log('Get message after 3s')
+      setTimeout(() => this.getMessage(), 3000);
+    }
   }
 
   sendMessage() {

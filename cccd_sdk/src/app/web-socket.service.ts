@@ -6,21 +6,28 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   providedIn: 'root',
 })
 export class WebSocketService {
+  private jsonRaw:any;
   public socket$!: WebSocketSubject<any>;
 
   constructor() {
     this.connect();
   }
 
+  getMessage(): string {
+    // Trả về tin nhắn đã xử lý
+    return this.jsonRaw;
+  }
+
   public connect() {
-    console.log("Connect socket ...")
+    console.log("Connect socket every 3s ...")
     const wsUrl = 'ws://127.0.0.1:8765/plugin/sign';
     this.socket$ = webSocket(wsUrl);
 
     this.socket$.subscribe(
       (data) => {
         // Xử lý dữ liệu khi nhận được từ WebSocket
-        console.log('Dữ liệu từ WebSocket:', data);
+        // Xử lý chuỗi và thay thế dấu " bằng \"
+        this.jsonRaw = data.replace(/"/g, '\\"');
       },
       (error) => {
         // Xử lý lỗi khi kết nối bị ngắt
