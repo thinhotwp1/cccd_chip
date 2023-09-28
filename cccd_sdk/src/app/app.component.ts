@@ -51,6 +51,7 @@ export class AppComponent implements OnDestroy {
     document.body.removeChild(el);
   }
   clearData(){
-    this.message='null'
+    this.message='Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !'
+    this.webSocketService.clearData()
   }
 }

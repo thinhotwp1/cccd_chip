@@ -18,6 +18,11 @@ export class WebSocketService {
     return this.jsonRaw;
   }
 
+  
+  clearData() {
+     this.jsonRaw = 'Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !';
+  }
+
   public connect() {
     console.log("Connect socket every 3s ...")
     const wsUrl = 'ws://127.0.0.1:8765/plugin/sign';
