@@ -1,13 +1,10 @@
+<div class="message-container">
+  <h2 class="message-title">Message json-raw, get message 3s/1:</h2>
+  <h5 class="message-content">{{ message }}</h5>
 
-    <div>
-      <h2>Message json-raw, get message 3s/1:</h2>
-      <h5 class="message" >{{ message }} </h5>
-      
-      <h2>Vui lòng đợi để sao chép json-raw</h2>
-      <button (click)="copyToClipboard()">Coppy json-raw</button>
-      <button (click)="clearData()">Clear data</button>
-    </div>
-
-<router-outlet></router-outlet>
+  <h2>Vui lòng đợi để sao chép json-raw</h2>
+  <button class="copy-button" (click)="copyToClipboard()">Coppy json-raw</button>
+  <button class="clear-button" (click)="clearData()">Clear data</button>
+</div>
 
 <router-outlet></router-outlet>

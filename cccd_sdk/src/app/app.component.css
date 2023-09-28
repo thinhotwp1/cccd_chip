@@ -1,34 +1,33 @@
-/* Style cho modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-  }
-  
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-  
+.message-container {
+  /* Thêm kiểu cho container chứa các phần tử */
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f7f7f7;
+}
+
+.message-title {
+  /* Thêm kiểu cho tiêu đề */
+  font-size: 24px;
+  color: #333;
+}
+
+.message-content {
+  /* Thêm kiểu cho nội dung tin nhắn */
+  font-size: 16px;
+  color: #666;
+}
+
+.copy-button, .clear-button {
+  /* Thêm kiểu cho các nút */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.copy-button:hover, .clear-button:hover {
+  /* Kiểu hover cho các nút */
+  background-color: #0056b3;
+}
