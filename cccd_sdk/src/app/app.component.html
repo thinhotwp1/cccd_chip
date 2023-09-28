@@ -1,0 +1,14 @@
+
+    <!-- <button (click)="sendMessage()">Gửi Message</button> -->
+
+    <p>Kết nối lại nếu không tự kết nối sau 3s, xem chi tiết ở console log</p>
+    <button (click)="reconnect()">Kết nối lại</button>
+
+    <div>
+      <h2>Message from device:</h2>
+      <br>
+      <div *ngFor="let message of messages">{{ message }}</div>
+      <br>
+    </div>
+
+<router-outlet></router-outlet>
