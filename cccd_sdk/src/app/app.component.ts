@@ -11,9 +11,11 @@ export class AppComponent implements OnDestroy {
   title = 'cccd_sdk';
  
   message: any; // Tin nhắn đã xử lý từ WebSocketService
+  dataCardBeforeClear: any;
 
   constructor(private webSocketService: WebSocketService) {
     this.webSocketService.connect(); // Kết nối đến WebSocket
+    this.message = 'Waiting ...';
     this.getMessage();
   }
 
@@ -51,7 +53,19 @@ export class AppComponent implements OnDestroy {
     document.body.removeChild(el);
   }
   clearData(){
-    this.message='Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !'
+    const alertClearData = 'Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !';
+    if(this.message != alertClearData){
+      this.dataCardBeforeClear = this.message
+    }
+    this.message = alertClearData
     this.webSocketService.clearData()
+  }
+  getOldCard(){
+    const el = document.createElement('textarea');
+    el.value = this.dataCardBeforeClear;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
   }
 }

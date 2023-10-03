@@ -6,7 +6,7 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
   providedIn: 'root',
 })
 export class WebSocketService {
-  private jsonRaw:any;
+  private jsonRaw:any = 'Waiting ...'  ;
   public socket$!: WebSocketSubject<any>;
 
   constructor() {

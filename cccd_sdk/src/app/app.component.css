@@ -17,17 +17,21 @@
   color: #666;
 }
 
-.copy-button, .clear-button {
+.copy-button, .clear-button, .before-button {
   /* Thêm kiểu cho các nút */
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #007bff;
   color: #fff;
   border: none;
   cursor: pointer;
   margin-right: 10px;
+  margin-left: 5px;
+}
+.clear-button{
+  margin-left: 100px;
 }
 
-.copy-button:hover, .clear-button:hover {
+button:hover {
   /* Kiểu hover cho các nút */
   background-color: #0056b3;
 }
