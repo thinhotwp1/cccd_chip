@@ -1,16 +1,19 @@
 // websocket.service.ts
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WebSocketService {
+
   private jsonRaw:any = 'Waiting ...'  ;
+  private dataSubject = new Subject<string>(); // Sử dụng Subject để thông báo khi có dữ liệu mới
+
   public socket$!: WebSocketSubject<any>;
 
   constructor() {
-    this.connect();
   }
 
   getMessage(): string {
@@ -18,14 +21,20 @@ export class WebSocketService {
     return this.jsonRaw;
   }
 
-  
+
   clearData() {
      this.jsonRaw = 'Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !';
   }
 
-  public connect() {
+  public connect(ip:any) {
     console.log("Connect socket every 3s ...")
-    const wsUrl = 'ws://127.0.0.1:8765/plugin/sign';
+    var wsUrl: string = '';
+
+    if (ip == '') {
+      wsUrl = 'ws://localhost:8765/plugin/sign';
+    } else {
+      wsUrl = `ws://${ip}:8765/plugin/sign`;
+    }
     this.socket$ = webSocket(wsUrl);
 
     this.socket$.subscribe(
@@ -33,15 +42,22 @@ export class WebSocketService {
         // Xử lý dữ liệu khi nhận được từ WebSocket
         // Xử lý chuỗi và thay thế dấu " bằng \"
         this.jsonRaw = data.replace(/"/g, '\\"');
+        // use rxjs here
+        this.dataSubject.next(this.jsonRaw); // Gửi dữ liệu đến Subject
       },
       (error) => {
         // Xử lý lỗi khi kết nối bị ngắt
         console.error('Lỗi kết nối WebSocket:', error);
 
         // Kết nối lại sau một khoảng thời gian
-        setTimeout(() => this.connect(), 3000);
+        setTimeout(() => this.connect(ip), 3000);
       }
     );
+  }
+
+  // Hàm này để subscribe từ bên ngoài để biết khi có dữ liệu mới
+  public onDataReceived() {
+    return this.dataSubject.asObservable();
   }
 
   send(data: any) {

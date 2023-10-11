@@ -20,7 +20,7 @@
 .copy-button, .clear-button, .before-button {
   /* Thêm kiểu cho các nút */
   padding: 10px 10px;
-  background-color: #007bff;
+  background-color: #311870;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -33,5 +33,5 @@
 
 button:hover {
   /* Kiểu hover cho các nút */
-  background-color: #0056b3;
+  background-color: #1d0e42;
 }

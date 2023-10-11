@@ -9,23 +9,26 @@ import { WebSocketService } from './web-socket.service';
 export class AppComponent implements OnDestroy {
 
   title = 'cccd_sdk';
- 
+
   message: any; // Tin nhắn đã xử lý từ WebSocketService
   dataCardBeforeClear: any;
 
   constructor(private webSocketService: WebSocketService) {
-    this.webSocketService.connect(); // Kết nối đến WebSocket
+    // Kết nối đến WebSocket ip tùy chỉnh, mặc định sẽ là localhost
     this.message = 'Waiting ...';
+
+    // Phần sử dụng sdk
+    this.webSocketService.connect("10.2.148.149"); // ví dụ: this.webSocketService.connect("10.2.148.117");
     this.getMessage();
   }
 
   getMessage(){
-    this.message = this.webSocketService.getMessage();
-      // gọi lấy lại message sau mỗi 3s
-      console.log('Get message after 3s')
-      console.log('message: ',this.message)
-      setTimeout(() => this.getMessage(), 3000);
-    
+    // Khi có dữ liệu mới sẽ tự cập nhật this.data và view lên màn hình
+    this.webSocketService.onDataReceived().subscribe((data) => {
+      console.log('Có dữ liệu mới:', data);
+      // Thực hiện xử lý dữ liệu ở đây
+      this.message = data
+    });
   }
 
   sendMessage() {
@@ -52,6 +55,7 @@ export class AppComponent implements OnDestroy {
     document.execCommand('copy');
     document.body.removeChild(el);
   }
+
   clearData(){
     const alertClearData = 'Xóa data thành công, vui lòng đọc lại căn cước công dân gắn chip !';
     if(this.message != alertClearData){
@@ -60,6 +64,7 @@ export class AppComponent implements OnDestroy {
     this.message = alertClearData
     this.webSocketService.clearData()
   }
+
   getOldCard(){
     const el = document.createElement('textarea');
     el.value = this.dataCardBeforeClear;
